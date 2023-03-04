@@ -1,0 +1,79 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header, footer {
+    background-color: coral;
+    padding: 1.875rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.intestazione {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    width: auto;
+    height: 2.5rem;
+    margin-right: 1.25rem;
+}
+
+.bottoni {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+}
+
+.board {
+    height: 31.25rem;
+    width: 31.25rem;
+    background-color: darksalmon;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.cell {
+    border: 1px solid black; 
+}
+
+.highlight {
+    background-color: blueviolet;
+}
+
+.cellEasy {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+
+.cellMedium {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+.cellHard {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
