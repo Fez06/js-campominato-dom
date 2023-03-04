@@ -16,6 +16,11 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+main h3 {
+    padding-bottom: 1.25rem;
 }
 
 header, footer {
@@ -59,6 +64,10 @@ header img {
     border: 1px solid black; 
 }
 
+.cellaBomba {
+    border: 1px solid black; 
+}
+
 .highlight {
     background-color: blueviolet;
 }
@@ -80,5 +89,5 @@ header img {
 
 .explode {
     background-color: red;
-    
+
 }

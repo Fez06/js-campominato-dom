@@ -47,10 +47,12 @@ function facTotum (htmlElement, cssClass, htmlContainer, valoreNumerazione) {
 
 function eviStampa (target, cssClass, htmlValue) {
     target.addEventListener('click', function(){
-    target.classList.add(cssClass);
+    target.classList.toggle(cssClass);
     console.log(htmlValue);
  })
 }
+
+
 
 
 function assegnaClasse(classe, target) {
@@ -103,7 +105,7 @@ function randomNumber(min, max) {
 function controllore(arrayName, valore) {
     for (let i = 0; i < arrayName.length; i++) {
 
-        console.log(arrayName[i]);
+        //console.log(arrayName[i]);
         if (valore === arrayName[i]) {
             console.log('gia esistente');
             return true
@@ -148,18 +150,40 @@ function celleXDif (inputDifficulty, target) {
     } else assegnaClasse('cellHard', target);
 }
 
+    //faccio una funzione che quando il player schiaccia su una cella la aggiunge ad un array. quel valore aggiunto viene prima controllato e se gia' presente nell'array non viene nuovamente aggiunto.
+    
+function antiCheat (target, arrayName) {
+    target.addEventListener('click', function(){
 
+        if (controllore(arrayName, target) === false) {
+            arrayName.push(target);
+            target.removeEventListener('click', function() {
+                target.classList.toggle(cssClass);
+                console.log(htmlValue);
+            })
+        }    
+    })
+
+}
+
+
+/*function wincon(containerBoard, celleSafe, gruppoBombe) {
+    containerBoard.addEventListener('click', function(){
+        if (celleSafe.length === (x - gruppoBombe.length)) {
+        alert('Quanto cazzo sei forte')
+    }})
+}*/
 
 // // Main  //
 
 const containerBoard = document.querySelector('.board');
 const start = document.getElementById('start');
-//aggiunte per bombe
-//const gruppoBombe = [''];
+      //aggiunte per bombe
 
-//prove
 const gruppoBombe = [];
-
+const celleSafe = [];
+const cellaEsplosa = [];
+           //prove
 //controllore(gruppoBombe, '4');
 //fillArrayUnicCasual(16, 20, gruppoBombe);
 
@@ -167,6 +191,11 @@ const gruppoBombe = [];
 //  Difficolta' //
 
 const difficulty = document.getElementById('difSelect');
+
+//Caselle spuntate
+
+let punti = document.querySelector('span.punti');
+punti.innerText = celleSafe.length;
 
 
 
@@ -188,16 +217,28 @@ start.addEventListener('click', function (){
     for (let i = 1; i <= x; i++) {
 
            //se i corrisponde ad un valore di gruppobombe gli assegno classe diversa altimenti tutto normale
-
+        
         if (controllore(gruppoBombe, i) === true) {
-            let cellaBomba = facTotum('div','cell', containerBoard, i);
+            let cellaBomba = facTotum('div','cellaBomba', containerBoard, i);
             eviStampa(cellaBomba, 'explode', i);
             celleXDif(inputDifficulty, cellaBomba);
+            //document.getElementsByClassName('cellabomba').classList.add('explode');
+            cellaBomba.addEventListener('click', function(){
+                const allBombe = document.querySelectorAll('.cellaBomba');
+                allBombe.forEach((element) => {
+                element.classList.add('explode');
+              });
+              alert('Peccato, hai perso');
+            })
+            
+            
 
         } else {
             let cella = facTotum('div','cell', containerBoard, i);
             eviStampa(cella, 'highlight', i);
             celleXDif(inputDifficulty, cella);
+            antiCheat(cella, celleSafe);
+            
         }
 
         /*if (inputDifficulty === 'easy') {
@@ -207,13 +248,28 @@ start.addEventListener('click', function (){
             assegnaClasse('cellMedium', cella);
 
         } else assegnaClasse('cellHard', cella);*/
-    
+        
     }
     
+    containerBoard.addEventListener('click', function(){
+        if (celleSafe.length === (x - gruppoBombe.length)) {
+        alert('Quanto cazzo sei forte')
+    }})
+
+    //cellaEsplosa.addEventListener()
+
+
 })
 
 
 
+
+
+
+/*containerBoard.addEventListener('click', function(){
+if (celleSafe.length === (x - gruppoBombe.length)) {
+alert('Quanto cazzo sei forte')
+}})*/
 
 
 
