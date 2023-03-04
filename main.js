@@ -180,9 +180,9 @@ const containerBoard = document.querySelector('.board');
 const start = document.getElementById('start');
       //aggiunte per bombe
 
-const gruppoBombe = [];
-const celleSafe = [];
-const cellaEsplosa = [];
+let gruppoBombe = [];
+let celleSafe = [];
+let cellaEsplosa = [];
            //prove
 //controllore(gruppoBombe, '4');
 //fillArrayUnicCasual(16, 20, gruppoBombe);
@@ -195,7 +195,10 @@ const difficulty = document.getElementById('difSelect');
 //Caselle spuntate
 
 let punti = document.querySelector('span.punti');
-punti.innerText = celleSafe.length;
+containerBoard.addEventListener('click', function(){
+    punti.innerText = celleSafe.length;
+});
+
 
 
 
@@ -204,6 +207,10 @@ start.addEventListener('click', function (){
     
         //pulisco il board
     containerBoard.innerText = '';
+        //pulisco gli array
+    gruppoBombe = [];
+    celleSafe = [];
+    cellaEsplosa = [];
         //ottengo la difficolta' aka numero di celle totali
     const inputDifficulty = difficulty.value;
     let x = nCicli(inputDifficulty);
@@ -228,7 +235,7 @@ start.addEventListener('click', function (){
                 allBombe.forEach((element) => {
                 element.classList.add('explode');
               });
-              alert('Peccato, hai perso');
+              alert(`Peccato, hai perso ma hai totalizzato ${celleSafe.length} punti!`);
             })
             
             
