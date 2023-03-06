@@ -47,7 +47,7 @@ function facTotum (htmlElement, cssClass, htmlContainer, valoreNumerazione) {
 
 function eviStampa (target, cssClass, htmlValue) {
     target.addEventListener('click', function(){
-    target.classList.toggle(cssClass);
+    target.classList.add(cssClass);
     console.log(htmlValue);
  })
 }
@@ -158,7 +158,7 @@ function antiCheat (target, arrayName) {
         if (controllore(arrayName, target) === false) {
             arrayName.push(target);
             target.removeEventListener('click', function() {
-                target.classList.toggle(cssClass);
+                target.classList.add(cssClass);
                 console.log(htmlValue);
             })
         }    
